@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply from: '../versions.gradle'
 
 android {
     compileSdkVersion 28
@@ -20,8 +23,28 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation deps.kotlin
+
+    //Design Support Libraries
+    implementation deps.support.v4
+    implementation deps.support.appcompat
+    implementation deps.support.material
+    implementation deps.support.cardview
+
+    //Navigation component
+    implementation deps.navigation.fragment
+    implementation deps.navigation.ui_ktx
+
+    //Firebase ML Kit, face detection libraries
+    implementation deps.firebase.vision
+    implementation deps.firebase.face_model
+
+    //Testing libraries
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.espresso
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.rules
+}
+repositories {
+    mavenCentral()
 }

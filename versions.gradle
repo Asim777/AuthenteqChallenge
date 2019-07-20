@@ -1,0 +1,49 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+
+ext.deps = [:]
+
+def versions = [:]
+versions.kotlin = '1.3.41'
+versions.gradle = '3.4.2'
+versions.androidX = '1.0.0'
+versions.appcompat = '1.0.2'
+versions.navigation = "1.0.0"
+versions.firebase_ml_vision = '22.0.0'
+versions.firebase_ml_vision_face_model = '18.0.0'
+versions.espresso = '3.2.0'
+versions.test = '1.2.0'
+versions.junit = "4.12"
+
+def deps = [:]
+deps.gradle = "com.android.tools.build:gradle:$versions.gradle"
+deps.kotlin_gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+
+def navigation = [:]
+navigation.fragment = "android.arch.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui_ktx =  "android.arch.navigation:navigation-ui-ktx:$versions.navigation"
+deps.navigation = navigation
+
+def firebase = [:]
+firebase.vision = "com.google.firebase:firebase-ml-vision:$versions.firebase_ml_vision"
+firebase.face_model = "com.google.firebase:firebase-ml-vision-face-model:$versions.firebase_ml_vision_face_model"
+deps.firebase = firebase
+
+def support = [:]
+support.v4 = "androidx.legacy:legacy-support-v4:$versions.androidX"
+support.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.material = "com.google.android.material:material:$versions.androidX"
+support.cardview = "androidx.cardview:cardview:$versions.cardView"
+deps.support = support
+
+def test = [:]
+test.junit = "junit:junit:$versions.junit"
+test.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+test.runner = "androidx.test:runner:$versions.test"
+test.rules = "androidx.test:rules:$versions.test"
+deps.test = test
+
+ext.deps = deps
