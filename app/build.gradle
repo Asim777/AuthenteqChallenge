@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 apply from: '../versions.gradle'
 
 android {
@@ -11,13 +12,16 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -30,12 +34,14 @@ dependencies {
     implementation deps.support.appcompat
     implementation deps.support.material
     implementation deps.support.cardview
+    implementation deps.support.constraint_layout
 
     //Navigation component
     implementation deps.navigation.fragment
     implementation deps.navigation.ui_ktx
 
     //Firebase ML Kit, face detection libraries
+    implementation deps.firebase.core
     implementation deps.firebase.vision
     implementation deps.firebase.face_model
 
@@ -44,7 +50,9 @@ dependencies {
     androidTestImplementation deps.test.espresso
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }
+
 repositories {
     mavenCentral()
 }
