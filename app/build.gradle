@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply from: '../versions.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.asimqasimzade.authenteq"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -27,7 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlin
+
+    //Lifecycle extensions
+    implementation deps.lifecycle_extensions
 
     //Design Support Libraries
     implementation deps.support.v4
@@ -50,7 +53,15 @@ dependencies {
     androidTestImplementation deps.test.espresso
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    //Camera Kit
+    implementation deps.camerakit.core
+    implementation deps.camerakit.jpegkit
+    implementation deps.kotlin
+    implementation deps.kotlin_coroutines
+
+    //Gson
+    implementation deps.gson
 }
 
 repositories {

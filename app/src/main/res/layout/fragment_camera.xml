@@ -15,12 +15,23 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <com.camerakit.CameraKitView
+            android:layout_width="match_parent"
+            android:id="@+id/camera_view"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:keepScreenOn="true"
+            app:camera_flash="auto"
+            app:camera_facing="front"
+            app:camera_focus="continuous"
+            app:camera_permissions="camera" />
+
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
-            android:onClick="@{(v) -> handler.onTakePhotoButtonClick(v)}"
+            android:onClick="@{() -> handler.onTakePhotoButtonClick()}"
             android:text="@string/take_a_photo_button_label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
