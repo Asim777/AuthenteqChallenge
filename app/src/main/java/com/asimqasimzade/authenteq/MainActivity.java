@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.NavigationUI;
 
@@ -12,7 +11,6 @@ import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navigationController;
-    private ViewModel mainViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

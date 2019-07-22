@@ -1,7 +1,6 @@
 package com.asimqasimzade.authenteq.camera;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.asimqasimzade.authenteq.R;
@@ -33,7 +32,13 @@ public class CameraFragment extends Fragment {
 
     private CameraKitView cameraView;
     private View graphicOverlay;
-    private ViewModel cameraViewModel;
+    private CameraViewModel cameraViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        cameraViewModel = ViewModelProviders.of(this).get(CameraViewModel.class);
+    }
 
     @Nullable
     @Override
@@ -48,25 +53,12 @@ public class CameraFragment extends Fragment {
         return binding.getRoot();
     }
 
-    //TODO: Move it to viewmodel
     public class CameraFragmentEventHandler {
         public void onTakePhotoButtonClick() {
             cameraView.captureImage(new CameraKitView.ImageCallback() {
                 @Override
                 public void onImage(CameraKitView cameraKitView, byte[] byteArray) {
-                    //TODO: Change graphic overlay color to green
-
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray,
-                            0, byteArray != null ? byteArray.length : 0);
-                    bitmap = Bitmap.createScaledBitmap(bitmap,
-                            cameraView != null ? cameraView.getWidth() : 0,
-                            cameraView != null ? cameraView.getHeight() : 0,
-                            false);
-
-                    runDetector(bitmap);
-
-                    //TODO:
-                    // graphicOverlay.clear();
+                    runDetector(cameraViewModel.createBitmapFromCapturedByteArray(cameraKitView, byteArray));
                 }
             });
         }

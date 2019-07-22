@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="handler"
             type="com.asimqasimzade.authenteq.camera.CameraFragment.CameraFragmentEventHandler" />
@@ -16,26 +17,35 @@
         tools:context=".MainActivity">
 
         <com.camerakit.CameraKitView
-            android:layout_width="match_parent"
             android:id="@+id/camera_view"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:keepScreenOn="true"
-            app:camera_flash="auto"
             app:camera_facing="front"
+            app:camera_flash="auto"
             app:camera_focus="continuous"
             app:camera_permissions="camera" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:onClick="@{() -> handler.onTakePhotoButtonClick()}"
-            android:text="@string/take_a_photo_button_label"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#55555555"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_button"
+                android:onClick="@{() -> handler.onTakePhotoButtonClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
